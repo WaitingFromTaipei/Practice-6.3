@@ -1,3 +1,16 @@
+---
+title: "Practice-6.3"
+author: "Wei-Ting Sun"
+date: "2024-11-10"
+output: html_document
+---
+
+### Lotka-Volterra function
+
+At first, I tried to fix the wrong code about the Lotka-Volterra function.
+To confirm that both 2 lines of species works whether competition exists, I set 2 variables `sp1` and `sp2`, which represented 2 species. 
+
+```{r, warning=FALSE, message=FALSE}
 Lotka_Volterra <- function(sp1, sp2){
   num_gen<-30
   N1 <- rep(0,30)
@@ -13,28 +26,31 @@ Lotka_Volterra <- function(sp1, sp2){
   for (i in 2:30)  {
     N1[i] = N1[i-1] + (growth.rate* N1[i-1] * ((K1-N1[i-1]-(a12*N2[i-1]))/K1))
     N2[i] = N2[i-1] + (growth.rate* N2[i-1] * ((K2-N2[i-1]-(a21*N1[i-1]))/K2))
-    print(N1[i])
-    print(N2[i])
   }
   plot(N1~generation,typ="b", col="blue",xlim=c(0,30),ylim=c(0,max(c(K1,K2))),ylab="N")
   lines(N2~generation,typ="b", col="red", pch=22, lty=2)
   legend("topleft",legend=c("species1","species2"), col=c("blue","red"),
          pch=21:22, lty=1:2)
   }
-  
+```
 
+Use `compLV` from the package `EcoVirtual` to check the result.
+(I cannot show the plot made by `compLV`...)
+
+```{r, warning=FALSE, message=FALSE}
 Lotka_Volterra(1,0)
 Lotka_Volterra(0,1)
 Lotka_Volterra(1,1)
-
 
 library(EcoVirtual)
 compLV(1,0,30,1.2,1.2,100,120,0.8,0.8)
 compLV(0,1,30,1.2,1.2,100,120,0.8,0.8)
 compLV(1,1,30,1.2,1.2,100,120,0.8,0.8)
+```
 
+Change the function slightly to create `Lotka_Volterra2`, which use `growth.rate` as variable.
 
-
+```{r, warning=FALSE, message=FALSE}
 Lotka_Volterra2 <- function(growth.rate){
   num_gen<-30
   N1 <- rep(0,30)
@@ -56,9 +72,14 @@ Lotka_Volterra2 <- function(growth.rate){
   legend("topleft",legend=c("species1","species2"), col=c("blue","red"),
          pch=21:22, lty=1:2)
 }
+```
 
+### Save GIF
+Time to make an animation!
+```{r, warning=FALSE, message=FALSE}
 library(animation)
 saveGIF({
   for (j in seq(0.5,1.5,by=0.1)){
     Lotka_Volterra2(j)
-  }}, movie.name = "Lotka_Volterra.gif",)
+  }})
+```
