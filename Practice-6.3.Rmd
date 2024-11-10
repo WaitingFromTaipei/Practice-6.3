@@ -33,8 +33,8 @@ Lotka_Volterra <- function(sp1, sp2){
          pch=21:22, lty=1:2)
   }
 ```
-
-Use `compLV` from the package `EcoVirtual` to check the result.
+<br>
+Use `compLV` from the package `EcoVirtual` to check the result.<br>
 (I cannot show the plot made by `compLV`...)
 
 ```{r, warning=FALSE, message=FALSE}
@@ -47,7 +47,7 @@ compLV(1,0,30,1.2,1.2,100,120,0.8,0.8)
 compLV(0,1,30,1.2,1.2,100,120,0.8,0.8)
 compLV(1,1,30,1.2,1.2,100,120,0.8,0.8)
 ```
-
+<br>
 Change the function slightly to create `Lotka_Volterra2`, which use `growth.rate` as variable.
 
 ```{r, warning=FALSE, message=FALSE}
