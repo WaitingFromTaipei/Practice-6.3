@@ -61,4 +61,4 @@ library(animation)
 saveGIF({
   for (j in seq(0.5,1.5,by=0.1)){
     Lotka_Volterra2(j)
-  }}, movie.name = "Lotka_Volterra.gif",)
+  }}, movie.name = "Lotka_Volterra.gif")
